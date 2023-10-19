@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +16,39 @@
         android:theme="@style/Theme.GandharVMS"
         tools:targetApi="31">
         <activity
+            android:name=".Inward_Tanker_Laboratory"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Production"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Sampling"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Weighment"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Security"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity
+            android:name=".Inward_Truck"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker"
+            android:exported="false" />
+        <activity
+            android:name=".Menu"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
