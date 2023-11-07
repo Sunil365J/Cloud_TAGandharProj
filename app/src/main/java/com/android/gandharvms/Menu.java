@@ -20,6 +20,9 @@ public class Menu extends AppCompatActivity {
        Intent intent = new Intent(this,Inward_Tanker.class);
         startActivity(intent);
    }
-
+   public void Inward_process_Truckclick(View view){
+        Intent intent = new Intent(this,Inward_Truck.class);
+        startActivity(intent);
+   }
 
 }

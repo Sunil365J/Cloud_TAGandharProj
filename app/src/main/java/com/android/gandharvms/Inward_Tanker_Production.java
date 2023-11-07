@@ -177,40 +177,55 @@ public class Inward_Tanker_Production extends AppCompatActivity {
 
 
     public void proinsertdata()
+
     {
-        Map<String,String> proitems = new HashMap<>();
+        String reqtounload = etreq.getText().toString().trim();
+        String tanknumber = ettankno.getText().toString().trim();
+        String rwqdt = etreqtoDt.getText().toString().trim();
+        String  confirmunload = etconbyop.getText().toString().trim();
+        String tanknumbers = tanknoun.getText().toString().trim();
+        String conunload = etconunloadDateTime.getText().toString().trim();
 
-        proitems.put("Req to unload",etreq.getText().toString().trim());
-        proitems.put("Tank Number Request",ettankno.getText().toString().trim());
-        proitems.put("Req to op D/T",etreqtoDt.getText().toString().trim());
-        proitems.put("confirm unload",etconbyop.getText().toString().trim());
-        proitems.put("Tank Number",tanknoun.getText().toString().trim());
-        proitems.put("con unload D/T",etconunloadDateTime.getText().toString().trim());
+        if (reqtounload.isEmpty()|| tanknumber.isEmpty()||rwqdt.isEmpty()|| confirmunload.isEmpty()|| tanknumbers.isEmpty()|| conunload.isEmpty() ){
+            Toast.makeText(this, "All Fields must be filled", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Map<String,String> proitems = new HashMap<>();
 
-
-
-
-
-
-
-        prodbroot.collection("Inward Tanker Production").add(proitems)
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-
-                        etreq.setText("");
-                        ettankno.setText("");
-                        etreqtoDt.setText("");
-                        etconbyop.setText("");
-                        tanknoun.setText("");
-                        etconunloadDateTime.setText("");
-
-                        Toast.makeText(Inward_Tanker_Production.this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+            proitems.put("Req to unload",etreq.getText().toString().trim());
+            proitems.put("Tank Number Request",ettankno.getText().toString().trim());
+            proitems.put("Req to op D/T",etreqtoDt.getText().toString().trim());
+            proitems.put("confirm unload",etconbyop.getText().toString().trim());
+            proitems.put("Tank Number",tanknoun.getText().toString().trim());
+            proitems.put("con unload D/T",etconunloadDateTime.getText().toString().trim());
 
 
 
-                    }
-                });
 
+
+
+
+
+            prodbroot.collection("Inward Tanker Production").add(proitems)
+                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                            etreq.setText("");
+                            ettankno.setText("");
+                            etreqtoDt.setText("");
+                            etconbyop.setText("");
+                            tanknoun.setText("");
+                            etconunloadDateTime.setText("");
+
+                            Toast.makeText(Inward_Tanker_Production.this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
+
+
+
+                        }
+                    });
+
+        }
     }
+
 }

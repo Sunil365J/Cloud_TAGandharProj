@@ -131,6 +131,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+
                 calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                 calendar.set(Calendar.MINUTE, minute);
 
@@ -178,7 +179,6 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
        }
        else {
-
 
 
            Map<String,String> weitems = new HashMap<>();

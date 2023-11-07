@@ -4,25 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inward_Tanker_Weighment">
-
+    tools:context=".Inward_Truck_weighment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
+
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+       android:gravity="center"
+       >
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="405dp"
-            android:layout_height="55dp"
-
+            android:layout_height="46dp"
             android:layout_weight="2">
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="185dp"
@@ -32,16 +30,17 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
                 android:id="@+id/regno"
-
+                android:gravity="center"
                 >
                 <EditText
-                    android:id="@+id/etserialnumber"
-                    android:layout_width="185dp"
+                    android:id="@+id/ettrwserialnumber"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Serial Number"
                     android:inputType="text"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="#322C4A"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -50,19 +49,23 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginLeft="200dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginTop="10dp"
-
+               android:layout_marginTop="10dp"
+                 android:gravity="center"
                 >
                 <EditText
-                    android:id="@+id/etvehicalno"
+                    android:id="@+id/ettrwvehicalno"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
-                    android:hint="Vehicle No"
+                    android:hint="Vehicle Number"
                     android:inputType="text"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                   />
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.cardview.widget.CardView>
+
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/wtwo"
@@ -81,13 +84,14 @@
 
                 >
                 <EditText
-                    android:id="@+id/etsuppliername"
+                    android:id="@+id/ettrwsupplier"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
-                    android:hint="Supplier Name"
+                    android:hint="Supplier"
                     android:inputType="text"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,16 +104,19 @@
 
                 >
                 <EditText
-                    android:id="@+id/etmaterialname"
+                    android:id="@+id/ettrwmaterial"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
-                    android:hint="Material Name"
+                    android:hint="Material"
                     android:inputType="text"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                   />
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.cardview.widget.CardView>
+
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/wthree"
@@ -128,13 +135,14 @@
 
                 >
                 <EditText
-                    android:id="@+id/etcustname"
+                    android:id="@+id/ettrwcustomer"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
-                    android:hint="Customer Name"
+                    android:hint="Customer"
                     android:inputType="text"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -147,7 +155,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etdriverno"
+                    android:id="@+id/ettrdriver"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Driver No"
@@ -157,12 +165,13 @@
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.cardview.widget.CardView>
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/wfour"
             android:layout_width="405dp"
             android:layout_height="55dp"
 
-             android:layout_weight="2"
+            android:layout_weight="2"
             >
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="185dp"
@@ -174,7 +183,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etoano"
+                    android:id="@+id/ettroa"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="OA Number"
@@ -193,7 +202,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etdate"
+                    android:id="@+id/ettrdate"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Date"
@@ -221,7 +230,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etgrossweight"
+                    android:id="@+id/ettrgrossweight"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Gross Weight"
@@ -240,7 +249,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/ettareweight"
+                    android:id="@+id/ettrtareweight"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Tare Weight"
@@ -265,11 +274,9 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
-
-
                 >
                 <EditText
-                    android:id="@+id/etnetweight"
+                    android:id="@+id/ettrnetweight"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Net Weight"
@@ -288,7 +295,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etdensity"
+                    android:id="@+id/ettrdensity"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Density"
@@ -303,7 +310,7 @@
             android:layout_width="405dp"
             android:layout_height="55dp"
 
-             android:layout_weight="2"
+            android:layout_weight="2"
             >
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="185dp"
@@ -312,9 +319,11 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="10dp"
+
+
                 >
                 <EditText
-                    android:id="@+id/etbatchno"
+                    android:id="@+id/ettrbatch"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Batch Number"
@@ -348,7 +357,7 @@
             android:layout_width="405dp"
             android:layout_height="55dp"
 
-           android:layout_weight="2"
+            android:layout_weight="2"
             >
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="185dp"
@@ -360,7 +369,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etsignby"
+                    android:id="@+id/ettrsignby"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Sign By"
@@ -379,7 +388,7 @@
 
                 >
                 <EditText
-                    android:id="@+id/etweDatetime"
+                    android:id="@+id/ettrdatetime"
                     android:layout_width="185dp"
                     android:layout_height="wrap_content"
                     android:hint="Date/Time"
@@ -429,6 +438,5 @@
 
         </androidx.cardview.widget.CardView>
     </LinearLayout>
-
 
 </RelativeLayout>

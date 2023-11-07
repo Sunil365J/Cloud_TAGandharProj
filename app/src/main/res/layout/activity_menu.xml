@@ -57,6 +57,7 @@
           android:textSize="25dp"
           android:textStyle="bold"
           android:textColor="@color/white"
+          android:onClick="Inward_process_Truckclick"
           />
       <TextView
           android:id="@+id/outward_Tanker"

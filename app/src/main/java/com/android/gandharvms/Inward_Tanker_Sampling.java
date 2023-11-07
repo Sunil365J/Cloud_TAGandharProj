@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class Inward_Tanker_Sampling extends AppCompatActivity {
 
-    EditText etvehicleno,etinvoiceno,etinvoicedate,materialname,etsqty1,etsUOMnetwt,etsvessalname,etstoragetankno,etssuppliername,etsdensity,
-            etsbatchnumber,etscustname,etsdate,etssignofproduction;
+    EditText etvehicleno,etinvoiceno,etinvoicedate,materialname,etsqty1,suomqty,snetweight,suomnetwt,svesselname,sstoragetn,
+            ssuppliername,etscustname,etsdate,etssignofproduction;
     Button etssubmit;
     FirebaseFirestore sadbroot;
     DatePickerDialog picker;
@@ -36,12 +36,12 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
         etinvoicedate=(EditText) findViewById(R.id.invoicedate);
         materialname=(EditText) findViewById(R.id.etmaterialname1);
         etsqty1=(EditText) findViewById(R.id.etsqty);
-        etsUOMnetwt=(EditText) findViewById(R.id.etsUOMnetwt);
-        etsvessalname=(EditText) findViewById(R.id.etsvessalname);
-        etstoragetankno=(EditText) findViewById(R.id.etstoragetankno);
-        etssuppliername=(EditText) findViewById(R.id.etssuppliername);
-        etsdensity=(EditText) findViewById(R.id.etsdensity);
-        etsbatchnumber=(EditText)findViewById(R.id.etsbatchnumber);
+        suomqty=(EditText) findViewById(R.id.etsUOMqty);
+        snetweight=(EditText) findViewById(R.id.etsnetweight);
+        suomnetwt=(EditText) findViewById(R.id.etsuomnetwt);
+        svesselname=(EditText) findViewById(R.id.etsvesselname);
+        sstoragetn=(EditText) findViewById(R.id.etstoragetnkn);
+        ssuppliername=(EditText)findViewById(R.id.etssuppliername);
         etscustname=(EditText)findViewById(R.id.etscustname);
         etsdate=(EditText)findViewById(R.id.etsdate);
         etssignofproduction=(EditText)findViewById(R.id.etssignofproduction);
@@ -82,52 +82,76 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
     public void sainsertdata()
     {
-        Map<String,String> saitems = new HashMap<>();
+        String vehiclenumber =etvehicleno.getText().toString().trim();
+        String invoicenumber = etinvoiceno.getText().toString().trim();
+        String invoicedate = etinvoicedate.getText().toString().trim();
+        String materialnames = materialname.getText().toString().trim();
+        String Qty = etsqty1.getText().toString().trim();
+        String uomqty = suomqty.getText().toString().trim();
+        String netweight = snetweight.getText().toString().trim();
+        String uomnetwe= suomnetwt.getText().toString().trim();
+        String vesselname = svesselname.getText().toString().trim();
+        String storagetanl = sstoragetn.getText().toString().trim();
+        String suppliername = ssuppliername.getText().toString().trim();
+        String customername = etscustname.getText().toString().trim();
+        String  date = etsdate.getText().toString().trim();
+        String signofproduction = etssignofproduction.getText().toString().trim();
 
-        saitems.put("Vehicle Number",etvehicleno.getText().toString().trim());
-        saitems.put("Material Name",etinvoiceno.getText().toString().trim());
-        saitems.put("Quantity",etinvoicedate.getText().toString().trim());
-        saitems.put("UOM Qty",materialname.getText().toString().trim());
-        saitems.put("Net.Wet",etsqty1.getText().toString().trim());
-        saitems.put("UOM Net.wt",etsUOMnetwt.getText().toString().trim());
-        saitems.put("vessel name",etsvessalname.getText().toString().trim());
-        saitems.put("storage Tank name",etsvessalname.getText().toString().trim());
-        saitems.put("Supplier Name",etssuppliername.getText().toString().trim());
-        saitems.put("Density",etsdensity.getText().toString().trim());
-        saitems.put("Batch Number",etsbatchnumber.getText().toString().trim());
-        saitems.put("Customer Name",etscustname.getText().toString().trim());
-        saitems.put("Date",etsdate.getText().toString().trim());
-        saitems.put("sign of production",etssignofproduction.getText().toString().trim());
-
-
-        sadbroot.collection("Inward Tanker Sampling").add(saitems)
-
-                .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-
-                        etvehicleno.setText("");
-                        etinvoiceno.setText("");
-                        etinvoicedate.setText("");
-                        materialname.setText("");
-                        etsqty1.setText("");
-                        etsUOMnetwt.setText("");
-                        etsvessalname.setText("");
-                        etsvessalname.setText("");
-                        etssuppliername.setText("");
-                        etsdensity.setText("");
-                        etsbatchnumber.setText("");
-                        etscustname.setText("");
-                        etsdate.setText("");
-                        etssignofproduction.setText("");
-
-                        Toast.makeText(Inward_Tanker_Sampling.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+        if (vehiclenumber.isEmpty() || invoicenumber.isEmpty() || invoicedate.isEmpty() || materialnames.isEmpty() ||Qty.isEmpty() ||uomqty.isEmpty()||
+             netweight.isEmpty()|| uomnetwe.isEmpty()|| vesselname.isEmpty()|| storagetanl.isEmpty()|| suppliername.isEmpty() || customername.isEmpty()||
+        date.isEmpty()|| signofproduction.isEmpty()){
+            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
+        }
+        else {
 
 
+            Map<String,String> saitems = new HashMap<>();
+
+            saitems.put("Vehicle Number",etvehicleno.getText().toString().trim());
+            saitems.put("Invoice Number",etinvoiceno.getText().toString().trim());
+            saitems.put("Invoice Date",etinvoicedate.getText().toString().trim());
+            saitems.put("Material Name",materialname.getText().toString().trim());
+            saitems.put("Qty",etsqty1.getText().toString().trim());
+            saitems.put("UOMqty",suomqty.getText().toString().trim());
+            saitems.put("Net Weight",snetweight.getText().toString().trim());
+            saitems.put("UOM Net Weight",suomnetwt.getText().toString().trim());
+            saitems.put("Vessel Name",svesselname.getText().toString().trim());
+            saitems.put("Storage Tank",sstoragetn.getText().toString().trim());
+            saitems.put("Supplier Name",ssuppliername.getText().toString().trim());
+            saitems.put("Customer Name",etscustname.getText().toString().trim());
+            saitems.put("Date",etsdate.getText().toString().trim());
+            saitems.put("sign of production",etssignofproduction.getText().toString().trim());
 
 
-                    }
-                });
+            sadbroot.collection("Inward Tanker Sampling").add(saitems)
+
+                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                            etvehicleno.setText("");
+                            etinvoiceno.setText("");
+                            etinvoicedate.setText("");
+                            materialname.setText("");
+                            etsqty1.setText("");
+                            suomqty.setText("");
+                            snetweight.setText("");
+                            suomnetwt.setText("");
+                            svesselname.setText("");
+                            sstoragetn.setText("");
+                            ssuppliername.setText("");
+                            etscustname.setText("");
+                            etsdate.setText("");
+                            etssignofproduction.setText("");
+
+                            Toast.makeText(Inward_Tanker_Sampling.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
+
+
+
+
+                        }
+                    });
+        }
 
 
     }

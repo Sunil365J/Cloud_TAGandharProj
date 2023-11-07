@@ -11,10 +11,10 @@
 
   <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginStart="10dp"
+      android:layout_height="650dp"
+
       android:layout_marginTop="10dp"
-      android:layout_marginEnd="10dp"
+
       android:layout_marginBottom="10dp"
       android:orientation="vertical"
       android:layout_marginLeft="10dp"
@@ -24,8 +24,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="405dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
 
         >
@@ -35,7 +35,9 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
+
           >
         <EditText
             android:id="@+id/etvehicleno"
@@ -53,14 +55,15 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
 
           >
         <EditText
             android:id="@+id/etinvoiceno"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:hint="Invoice Number"
+            android:hint="Invoice No"
             android:inputType="text"
             android:textSize="17dp"
             android:textStyle="bold"/>
@@ -71,8 +74,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/wthree"
         android:layout_width="405dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
         >
 
@@ -82,8 +85,8 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
             android:id="@+id/invoicedate"
@@ -101,14 +104,14 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
             android:id="@+id/etmaterialname1"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:hint="Material Name "
+            android:hint="Material"
             android:inputType="text"
             android:textSize="17dp"
             android:textStyle="bold"/>
@@ -121,8 +124,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/wfour"
         android:layout_width="405dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
 
         >
@@ -132,8 +135,8 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
 
           >
         <EditText
@@ -152,11 +155,11 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
-            android:id="@+id/etsUOMnetwt"
+            android:id="@+id/etsUOMqty"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:hint="UOM"
@@ -170,8 +173,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/wfive"
         android:layout_width="405dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="5dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
         >
 
@@ -181,11 +184,11 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
-            android:id="@+id/etsvessalname"
+            android:id="@+id/etsnetweight"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:hint="Net Weight"
@@ -200,11 +203,11 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
-            android:id="@+id/etstoragetankno"
+            android:id="@+id/etsuomnetwt"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:hint="UOM"
@@ -218,8 +221,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/wsix"
         android:layout_width="405dp"
-        android:layout_height="10dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
         >
       <com.google.android.material.textfield.TextInputLayout
@@ -228,18 +231,19 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
+          android:layout_marginTop="10dp"
           android:id="@+id/regno"
-          android:background="#F2F2F2"
+
           >
+
         <EditText
-            android:id="@+id/etssuppliername"
+            android:id="@+id/etsvesselname"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:hint="Vessel Name"
             android:inputType="text"
             android:textSize="17dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <com.google.android.material.textfield.TextInputLayout
@@ -248,11 +252,11 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
-            android:id="@+id/etsdensity"
+            android:id="@+id/etstoragetnkn"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
             android:hint="Storage Tank No"
@@ -266,8 +270,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/wseven"
         android:layout_width="405dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
         >
 
@@ -277,14 +281,14 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
-            android:id="@+id/etsbatchnumber"
+            android:id="@+id/etssuppliername"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:hint="Supplier Name"
+            android:hint="Supplier"
             android:inputType="text"
             android:textSize="17dp"
             android:textStyle="bold"/>
@@ -296,14 +300,14 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
             android:id="@+id/etscustname"
             android:layout_width="185dp"
             android:layout_height="wrap_content"
-            android:hint="Customer Name"
+            android:hint="Customer"
             android:inputType="text"
             android:textSize="17dp"
             android:textStyle="bold"/>
@@ -314,8 +318,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/w_eight"
         android:layout_width="405dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="0dp"
+
         android:layout_weight="2"
         >
       <com.google.android.material.textfield.TextInputLayout
@@ -324,8 +328,8 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="5dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
             android:id="@+id/etsdate"
@@ -344,8 +348,8 @@
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
           android:layout_marginLeft="200dp"
           android:layout_marginRight="30dp"
-          android:layout_marginTop="5dp"
-          android:background="#F2F2F2"
+          android:layout_marginTop="10dp"
+
           >
         <EditText
             android:id="@+id/etssignofproduction"
@@ -362,7 +366,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="405dp"
         android:layout_height="55dp"
-        android:layout_marginTop="5dp"
+
         >
       <LinearLayout
           android:layout_width="match_parent"
