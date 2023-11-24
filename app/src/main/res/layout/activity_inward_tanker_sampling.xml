@@ -22,346 +22,92 @@
 
 
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="405dp"
-        android:layout_height="0dp"
 
-        android:layout_weight="2"
-
-        >
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-
-          >
-        <EditText
-            android:id="@+id/etvehicleno"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Vehicle Number"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-
-          >
-        <EditText
-            android:id="@+id/etinvoiceno"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Invoice No"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wthree"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
-
-        android:layout_weight="2"
-        >
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/invoicedate"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Invoice Date"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/etmaterialname1"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Material"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wfour"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
-
-        android:layout_weight="2"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
 
         >
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
+      <EditText
+          android:id="@+id/etsdate"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
+          android:hint="Date"
+          android:inputType="text"
+          android:textSize="17dp"
+          android:textStyle="bold"
+          android:focusable="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
 
-          >
-        <EditText
-            android:id="@+id/etsqty"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Qty"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/etsUOMqty"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="UOM"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wfive"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
-
-        android:layout_weight="2"
         >
+      <EditText
+          android:id="@+id/etreciving"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Sample Reciving Time"
+          android:inputType="text"
+          android:textSize="17dp"
+          android:textStyle="bold"
+          android:focusable="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
       <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
+          android:layout_marginLeft="30dp"
           android:layout_marginRight="30dp"
           android:layout_marginTop="10dp"
 
-          >
-        <EditText
-            android:id="@+id/etsnetweight"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Net Weight"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
 
           >
         <EditText
-            android:id="@+id/etsuomnetwt"
-            android:layout_width="185dp"
+            android:id="@+id/etsubmitted"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="UOM"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wsix"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
-
-        android:layout_weight="2"
-        >
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-          android:id="@+id/regno"
-
-          >
-
-        <EditText
-            android:id="@+id/etsvesselname"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Vessel Name"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold" />
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/etstoragetnkn"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Storage Tank No"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/wseven"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
-
-        android:layout_weight="2"
-        >
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/etssuppliername"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Supplier"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/etscustname"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Customer"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/w_eight"
-        android:layout_width="405dp"
-        android:layout_height="0dp"
-
-        android:layout_weight="2"
-        >
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
-          android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="5dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
-
-          >
-        <EditText
-            android:id="@+id/etsdate"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Date"
+            android:hint="Sample Submitted Time"
             android:inputType="text"
             android:textSize="17dp"
             android:textStyle="bold"
             android:focusable="false"/>
       </com.google.android.material.textfield.TextInputLayout>
 
-      <com.google.android.material.textfield.TextInputLayout
-          android:layout_width="185dp"
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        >
+      <EditText
+          android:id="@+id/etvehicleno"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-          android:layout_marginLeft="200dp"
-          android:layout_marginRight="30dp"
-          android:layout_marginTop="10dp"
+          android:hint="Vehicle Number"
+          android:inputType="text"
+          android:textSize="17dp"
+          android:textStyle="bold"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
-          >
-        <EditText
-            android:id="@+id/etssignofproduction"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:hint="Sign of production"
-            android:inputType="text"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
-      </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:layout_width="405dp"

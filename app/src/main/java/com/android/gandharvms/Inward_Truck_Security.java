@@ -79,14 +79,15 @@ public class Inward_Truck_Security extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_truck_security);
 
-        // Uom work
+                                  // Uom work
         autoCompleteTextView= findViewById(R.id.etsuom);
         autoCompleteTextView1=findViewById(R.id.etsuom2);
-        adapterItems = new ArrayAdapter<String>(this,R.layout.list_itemuom,items);
 
-        adapterItems1 = new ArrayAdapter<String>(this,R.layout.list_itemuom,items1);
+        adapterItems = new ArrayAdapter<String>(this,R.layout.list_itemuom,items);
+        adapterItems1 = new ArrayAdapter<String>(this,R.layout.in_tr_se_nwe_list,items1);
+
         autoCompleteTextView.setAdapter(adapterItems);
-        autoCompleteTextView.setAdapter(adapterItems1);
+        autoCompleteTextView1.setAdapter(adapterItems1);
 
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

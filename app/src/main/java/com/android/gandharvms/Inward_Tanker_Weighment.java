@@ -1,15 +1,23 @@
 package com.android.gandharvms;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -17,17 +25,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
+
 
 public class Inward_Tanker_Weighment extends AppCompatActivity {
 
     EditText  etserialnumber,etvehicalno,etsuppliername,etmaterialname,etcustname,etdriverno,etoano,etdate,
-              etgrossweight,ettareweight,etnetweight,etdensity, etbatchno,etsignby,etweDatetime ;
+              etgrossweight,ettareweight,etnetweight,etdensity, etbatchno,etsignby,etweDatetime,etcontainer,etshortagedip,etshortageweight ;
     Button wesubmit;
     FirebaseFirestore wedbroot;
 
@@ -35,10 +48,30 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance();
 
     DatePickerDialog picker;
+
+    Button view;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+//    private static final int REQUEST_IMAGE_CAPTURE_2 = 2;
+    private ImageView imageView1;
+//    private ImageView imageView2;
+    private Uri imageUri1;
+//    private Uri imageUri2;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker_weighment);
+
+        imageView1 = findViewById(R.id.imageView1);
+//        imageView2 = findViewById(R.id.imageView2);
+
 
 
 //        etserialnumber,etvehicalno,
@@ -64,8 +97,31 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
         etbatchno=(EditText) findViewById(R.id.etbatchno);
         etsignby=(EditText) findViewById(R.id.etsignby);
         etweDatetime=(EditText) findViewById(R.id.etweDatetime);
+        etcontainer= (EditText)findViewById(R.id.container);
+        etshortagedip = (EditText)findViewById(R.id.shortagedip);
+        etshortageweight =(EditText) findViewById(R.id.shortageweight);
 
         datetimeTextview=findViewById(R.id.etweDatetime);
+
+        // Adding Gross weight and Tare weight
+        etgrossweight.addTextChangedListener(textWatcher);
+        ettareweight.addTextChangedListener(textWatcher);
+
+
+        //view button
+        view = findViewById(R.id.dbview);
+//        dbbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(Inward_Tanker_Security.this,Inward_Tanker_Security_Viewdata.class));
+//            }
+//        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Inward_Tanker_Weighment.this,Inward_Tanker_Weighment_Viewdata.class));
+            }
+        });
 
         datetimeTextview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,12 +226,17 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
        String batchno = etbatchno.getText().toString().trim();
        String signby = etsignby.getText().toString().trim();
        String datetime = etweDatetime.getText().toString().trim();
+       String container = etcontainer.getText().toString().trim();
+       String shortagedip = etshortagedip.getText().toString().trim();
+       String shortageweight = etshortageweight.getText().toString().trim();
+
+
 
 
        if (serialnumber.isEmpty() || vehicelnumber.isEmpty() || suppliername.isEmpty() || materialname.isEmpty() ||
                custname.isEmpty() || driverno.isEmpty() || oan.isEmpty() || date.isEmpty() || grossweight.isEmpty() ||
                tareweight.isEmpty() || netweight.isEmpty() ||  density.isEmpty() || batchno.isEmpty() ||
-               signby.isEmpty() || datetime.isEmpty()){
+               signby.isEmpty() || datetime.isEmpty() || container.isEmpty() || shortagedip.isEmpty() || shortageweight.isEmpty() ){
            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
        }
        else {
@@ -197,6 +258,11 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
            weitems.put("Batch Number",etbatchno.getText().toString().trim());
            weitems.put("Sign By",etsignby.getText().toString().trim());
            weitems.put("We Date Time",etweDatetime.getText().toString().trim());
+           weitems.put("Container No",etcontainer.getText().toString().trim());
+           weitems.put("shortage Dip",etshortagedip.getText().toString().trim());
+           weitems.put("shortage weight",etshortageweight.getText().toString().trim());
+
+
 
 
            wedbroot.collection("Inward Tanker Weighment").add(weitems)
@@ -217,6 +283,9 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
                            etbatchno.setText("");
                            etsignby.setText("");
                            etweDatetime.setText("");
+                           etcontainer.setText("");
+                           etshortagedip.setText("");
+                           etshortageweight.setText("");
 
                            Toast.makeText(Inward_Tanker_Weighment.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
 
@@ -226,18 +295,129 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
 
 
-       }
 
        }
 
+       }
+
+                                       // Adding Gross weight and Tare weight above two lines
+     private TextWatcher textWatcher = new TextWatcher() {
+         @Override
+         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+         }
+
+         @Override
+         public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+         }
+
+         @Override
+         public void afterTextChanged(Editable s) {
+
+             calculateNetWeight();
+         }
+     };
+
+    public void calculateNetWeight(){
+
+        String grossweightStr = etgrossweight.getText().toString().trim();
+        String tareweightStr = ettareweight.getText().toString().trim();
+
+        double grossWeight = grossweightStr.isEmpty() ? 0.0 : Double.parseDouble(grossweightStr);
+        double tareWeight = tareweightStr.isEmpty() ? 0.0 : Double.parseDouble(tareweightStr);
+
+        double netweight = grossWeight + tareWeight;
+
+        etnetweight.setText("Net weight: " + netweight);
+    }
+
+                   //  image upload firebase
+
+    public void  captureImageFromCamera1(android.view.View view){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE);
+        }
+    }
+//    public void captureImageFromCamera2(android.view.View view){
+//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        if (takePictureIntent.resolveActivity(getPackageManager()) != null){
+//            startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE_2);
+//        }
+//    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null){
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
 
 
+            imageUri1 = getImageUri(imageBitmap);
+
+            imageView1.setImageBitmap(imageBitmap);
+
+            uploadImageToStorage();
+
+        }
+//        else if (resultCode == REQUEST_IMAGE_CAPTURE_2 && resultCode == RESULT_OK && data != null) {
+//            Bundle extras = data.getExtras();
+//            Bitmap imagBitmap = (Bitmap) extras.get("data");
+//
+//            imageUri2 = getImageUri(imagBitmap);
+//
+//            imageView2.setImageBitmap(imagBitmap);
+//
+//            uploadImageToStorage(imageUri2);
+//
+//        }
+    }
+
+    private Uri getImageUri (Bitmap bitmap){
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,bytes);
+        String path = MediaStore.Images.Media.insertImage(getContentResolver(),bitmap,"Title",null);
+        return Uri.parse(path);
+    }
+
+    private void uploadImageToStorage(){
+        try {
+            if (imageUri1 != null){
+                StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("Inward_Tanker_Weighment/" + UUID.randomUUID() + ".jpg");
+
+                storageRef.putFile(imageUri1)
+                        .addOnSuccessListener(taskSnapshot -> {
+                            storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                saveImageUrlToFirestore(uri.toString());
+                            });
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, "Failed ", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+            }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+       }
+       private void saveImageUrlToFirestore(String imageUrl){
+
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        Map<String,Object> image = new HashMap<>();
+        image.put("imageUrl",imageUrl);
+//        image.put("In Driver", imageUrl);
+
+           firestore.collection("Weighment")
+                .add(image)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(this, "Image Upload succesfully", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to save", Toast.LENGTH_SHORT).show();
+                });
+       }
+    }
 
 
-
-
-
-
-
-
-}
