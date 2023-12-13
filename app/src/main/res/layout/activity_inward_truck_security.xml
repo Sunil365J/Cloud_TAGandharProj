@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inward_Truck_Security">
+    tools:context=".Inward_Truck_Security.Inward_Truck_Security">
 
 <ScrollView
     android:layout_width="match_parent"
@@ -235,7 +235,9 @@
                     android:hint="Serial Number"
                     android:inputType="text"
                     android:textSize="17dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:focusable="false"
+                    android:clickable="false"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -461,10 +463,21 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="150dp"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="23dp"
                     android:text="Cancel"
+                    android:textSize="22dp"
+                    android:textStyle="bold">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/viewdb"
+                    android:layout_marginLeft="35dp"
+                    android:text="View"
                     android:textSize="22dp"
                     android:textStyle="bold">
 
@@ -473,7 +486,7 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/wesubmit"
-                    android:layout_width="150dp"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:layout_below="@id/OUM."
                     android:layout_marginLeft="15dp"

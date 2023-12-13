@@ -1,10 +1,11 @@
-package com.android.gandharvms;
+package com.android.gandharvms.Inward_Tanker_Production;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,12 +14,14 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.gandharvms.FcmNotificationsSender;
+import com.android.gandharvms.Inward_Tanker;
+import com.android.gandharvms.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.checkerframework.checker.units.qual.C;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,8 +31,9 @@ import java.util.Map;
 
 public class Inward_Tanker_Production extends AppCompatActivity {
 
-    EditText etreq,ettankno,etreqtoDt,etconbyop,tanknoun,etconunloadDateTime;
+    EditText etint,etreq,ettankno,etreqtoDt,etconbyop,tanknoun,etconunloadDateTime;
     Button prosubmit;
+    Button viewdata;
 
     FirebaseFirestore prodbroot;
 
@@ -41,7 +45,10 @@ public class Inward_Tanker_Production extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker_production);
+        //Send Notification to all
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
+        etint = (EditText) findViewById(R.id.etintime);
         etreq= (EditText) findViewById(R.id.etreq);
         ettankno=(EditText) findViewById(R.id.ettankno);
         etreqtoDt=(EditText) findViewById(R.id.etreqtoDt);
@@ -54,6 +61,15 @@ public class Inward_Tanker_Production extends AppCompatActivity {
         //datetimepickertesting
         datetimeTextview =findViewById(R.id.etreqtoDt);
         datetimeTextview1 = findViewById(R.id.etconunloadDateTime);
+
+
+        viewdata = findViewById(R.id.view);
+        viewdata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Inward_Tanker_Production.this,Inward_Tanker_Production_Viewdata.class));
+            }
+        });
 
         datetimeTextview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,11 +190,20 @@ public class Inward_Tanker_Production extends AppCompatActivity {
 
     }
 
+    public void makeNotification(){
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+                "Production Process Done..!",
+                "Laboratory Can Start there Work",
+                getApplicationContext(), Inward_Tanker_Production.this);
+        notificationsSender.SendNotifications();
+    }
+
 
 
     public void proinsertdata()
 
     {
+        String intime = etint.getText().toString().trim();
         String reqtounload = etreq.getText().toString().trim();
         String tanknumber = ettankno.getText().toString().trim();
         String rwqdt = etreqtoDt.getText().toString().trim();
@@ -186,18 +211,19 @@ public class Inward_Tanker_Production extends AppCompatActivity {
         String tanknumbers = tanknoun.getText().toString().trim();
         String conunload = etconunloadDateTime.getText().toString().trim();
 
-        if (reqtounload.isEmpty()|| tanknumber.isEmpty()||rwqdt.isEmpty()|| confirmunload.isEmpty()|| tanknumbers.isEmpty()|| conunload.isEmpty() ){
+        if ( intime.isEmpty() || reqtounload.isEmpty()|| tanknumber.isEmpty()||rwqdt.isEmpty()|| confirmunload.isEmpty()|| tanknumbers.isEmpty()|| conunload.isEmpty() ){
             Toast.makeText(this, "All Fields must be filled", Toast.LENGTH_SHORT).show();
         }
         else {
             Map<String,String> proitems = new HashMap<>();
 
-            proitems.put("Req to unload",etreq.getText().toString().trim());
-            proitems.put("Tank Number Request",ettankno.getText().toString().trim());
-            proitems.put("Req to op D/T",etreqtoDt.getText().toString().trim());
-            proitems.put("confirm unload",etconbyop.getText().toString().trim());
-            proitems.put("Tank Number",tanknoun.getText().toString().trim());
-            proitems.put("con unload D/T",etconunloadDateTime.getText().toString().trim());
+            proitems.put("In_Time",etint.getText().toString().trim());
+            proitems.put("Req_to_unload",etreq.getText().toString().trim());
+            proitems.put("Tank_Number_Request",ettankno.getText().toString().trim());
+            proitems.put("Req_to_op_DT",etreqtoDt.getText().toString().trim());
+            proitems.put("confirm_unload",etconbyop.getText().toString().trim());
+            proitems.put("Tank_Number",tanknoun.getText().toString().trim());
+            proitems.put("con_unload_DT",etconunloadDateTime.getText().toString().trim());
 
 
 
@@ -211,6 +237,7 @@ public class Inward_Tanker_Production extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
 
+                            etint.setText("");
                             etreq.setText("");
                             ettankno.setText("");
                             etreqtoDt.setText("");
@@ -224,6 +251,9 @@ public class Inward_Tanker_Production extends AppCompatActivity {
 
                         }
                     });
+            Intent intent= new Intent(this, Inward_Tanker.class);
+            startActivity(intent);
+            makeNotification();
 
         }
     }

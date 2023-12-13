@@ -48,6 +48,8 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx:20.2.1")
     implementation("com.google.firebase:firebase-firestore-ktx:24.9.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+    implementation("com.google.firebase:firebase-messaging:23.3.1")
+    implementation("com.android.volley:volley:1.2.1")
 //    implementation("com.google.firebase:firebase-firestore:24.9.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

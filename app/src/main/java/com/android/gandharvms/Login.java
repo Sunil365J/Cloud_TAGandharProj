@@ -3,7 +3,9 @@ package com.android.gandharvms;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +52,10 @@ public class Login extends AppCompatActivity {
 
                                 if (getpassword.equals(passwordTxt)){
                                     Toast.makeText(Login.this, "Succesfully Logged in ", Toast.LENGTH_SHORT).show();
+                                    SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("EMPLID_KEY", emplidTxt);
+                                    editor.apply();
                                     startActivity(new Intent(Login.this,Menu.class));
                                     finish();
                                 }

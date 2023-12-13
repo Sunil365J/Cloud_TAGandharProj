@@ -1,18 +1,25 @@
 package com.android.gandharvms;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
-
+import com.android.gandharvms.Inward_Tanker_Laboratory.Inward_Tanker_Laboratory;
+import com.android.gandharvms.Inward_Tanker_Production.Inward_Tanker_Production;
+import com.android.gandharvms.Inward_Tanker_Sampling.Inward_Tanker_Sampling;
+import com.android.gandharvms.Inward_Tanker_Security.Inward_Tanker_Security;
+import com.android.gandharvms.Inward_Tanker_Weighment.Inward_Tanker_Weighment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class Inward_Tanker extends AppCompatActivity {
@@ -24,87 +31,76 @@ public class Inward_Tanker extends AppCompatActivity {
 //    CardView cardView2;
 //
 //    CardView cardview3;
+DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://gandharvms-default-rtdb.firebaseio.com/");
+private String userRole;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker);
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String receivedEmplid = sharedPreferences.getString("EMPLID_KEY", "admin");
 
+        databaseReference.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userRole=snapshot.child(receivedEmplid).child("role").getValue(String.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-//      cardView = findViewById(R.id.sequirity);
-//      cardView2 = findViewById(R.id.Weighmentid);
-//      cardview3 = findViewById(R.id.sampling);
-
-//      cardView.setOnClickListener(new View.OnClickListener() {
-//          @Override
-//          public void onClick(View view) {
-//
-//              Fragment fragment = new InTA_Se();
-//
-//              FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//              fragmentTransaction.replace(R.id.sequirity,fragment).commit();
-//          }
-//      });
-//      cardView2.setOnClickListener(new View.OnClickListener() {
-//          @Override
-//          public void onClick(View view) {
-//
-//              Fragment fragment = new InTA_two();
-//
-//              FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//              fragmentTransaction.replace(R.id.Weighmentid,fragment).commit();
-//          }
-//      });
-
-//      cardview3.setOnClickListener(new View.OnClickListener() {
-//          @Override
-//          public void onClick(View view) {
-//
-//              Fragment fragment = new InTA_Three();
-//
-//              FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//              fragmentTransaction.replace(R.id.sampling,fragment).commit();
-//          }
-//      });
-
-//        one = findViewById(R.id.one);
-//        two = findViewById(R.id.two);
-//        three =findViewById(R.id.three);
-//        four = findViewById(R.id.four);
-//        five = findViewById(R.id.five);
-//        six = findViewById(R.id.six);
-//        linearLayout=findViewById(R.id.seqlayout);
-//
-//        linearLayout2=findViewById(R.id.weiglayout);
-//        wone=findViewById(R.id.wone);
-
-
+            }
+        });
 
 
 
     }
     public void sequirityinwardT(View view){
-        Intent intent= new Intent(this,Inward_Tanker_Security.class);
-        startActivity(intent);
+        if(userRole.equals("Security")){
+            Intent intent= new Intent(this, Inward_Tanker_Security.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(Inward_Tanker.this, "You are not in Security Department", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void Weighmentclick(View view){
-        Intent intent = new Intent(this,Inward_Tanker_Weighment.class);
-        startActivity(intent);
+        if(userRole.equals("Weighment")){
+            Intent intent = new Intent(this, Inward_Tanker_Weighment.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(Inward_Tanker.this, "You are not in Weighment Department", Toast.LENGTH_SHORT).show();
+        }
     }
     public void samplicgclick(View view){
-        Intent intent = new Intent(this, Inward_Tanker_Sampling.class);
-        startActivity(intent);
+        if(userRole.equals("Sampling")){
+            Intent intent = new Intent(this, Inward_Tanker_Sampling.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(Inward_Tanker.this, "You are not in Sampling Department", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void productionclick (View view){
-        Intent intent = new Intent(this,Inward_Tanker_Production.class);
-        startActivity(intent);
+        if(userRole.equals("Production")){
+            Intent intent = new Intent(this, Inward_Tanker_Production.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(Inward_Tanker.this, "You are not in Production Department", Toast.LENGTH_SHORT).show();
+        }
     }
     public void Laboratoryclick (View view){
-        Intent intent = new Intent(this, Inward_Tanker_Laboratory.class);
-        startActivity(intent);
+        if(userRole.equals("Laboratory")){
+            Intent intent = new Intent(this, Inward_Tanker_Laboratory.class);
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(Inward_Tanker.this, "You are not in Laboratory Department", Toast.LENGTH_SHORT).show();
+        }
     }
-
 
 
 

@@ -4,13 +4,18 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="true" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="true" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,34 +28,58 @@
         android:theme="@style/Theme.GandharVMS"
         tools:targetApi="31">
         <activity
-            android:name=".Inward_Tanker_Weighment_Viewdata"
+            android:name=".Outward_Tanker"
             android:exported="false" />
         <activity
-            android:name=".Inward_Tanker_Security_Viewdata"
+            android:name=".Inward_Truck_store.Inward_Truck_Store_viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Truck_Store"
+            android:name=".Inward_Truck_Weighment.Inward_Truck_Weighment_Viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Truck_weighment"
+            android:name=".Inward_Truck_Security.Inward_Truck_Security_viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Truck_Security"
+            android:name=".Inward_Tanker_Laboratory.Inward_Tanker_Lab_Viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Tanker_Laboratory"
+            android:name=".Inward_Tanker_Production.Inward_Tanker_Production_Viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Tanker_Production"
+            android:name=".Inward_Tanker_Sampling.Inward_Tanker_saampling_View_data"
             android:exported="false" />
         <activity
-            android:name=".Inward_Tanker_Sampling"
+            android:name=".Inward_Tanker_Sampling.Inward_Tanker_Sampling_View_data"
+            android:exported="false" /> <!-- Add any additional attributes or intent filters here -->
+        <activity
+            android:name=".Inward_Tanker_Weighment.Inward_Tanker_Weighment_Viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Tanker_Weighment"
+            android:name=".Inward_Tanker_Security.Inward_Tanker_Security_Viewdata"
             android:exported="false" />
         <activity
-            android:name=".Inward_Tanker_Security"
+            android:name=".Inward_Truck_store.Inward_Truck_Store"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Truck_Weighment.Inward_Truck_weighment"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Truck_Security.Inward_Truck_Security"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Laboratory.Inward_Tanker_Laboratory"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Production.Inward_Tanker_Production"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Sampling.Inward_Tanker_Sampling"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Weighment.Inward_Tanker_Weighment"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Security.Inward_Tanker_Security"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
@@ -77,6 +106,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".FirebaseMessagingService"
+            android:exported="true"
+            android:permission="TODO"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

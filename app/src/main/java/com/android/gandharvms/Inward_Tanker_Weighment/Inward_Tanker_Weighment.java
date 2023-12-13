@@ -1,4 +1,4 @@
-package com.android.gandharvms;
+package com.android.gandharvms.Inward_Tanker_Weighment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,10 +21,14 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.gandharvms.FcmNotificationsSender;
+import com.android.gandharvms.Inward_Tanker;
+import com.android.gandharvms.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -39,7 +43,7 @@ import java.util.UUID;
 
 public class Inward_Tanker_Weighment extends AppCompatActivity {
 
-    EditText  etserialnumber,etvehicalno,etsuppliername,etmaterialname,etcustname,etdriverno,etoano,etdate,
+    EditText etint,etserialnumber,etvehicalno,etsuppliername,etmaterialname,etcustname,etdriverno,etoano,etdate,
               etgrossweight,ettareweight,etnetweight,etdensity, etbatchno,etsignby,etweDatetime,etcontainer,etshortagedip,etshortageweight ;
     Button wesubmit;
     FirebaseFirestore wedbroot;
@@ -69,6 +73,9 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker_weighment);
 
+        //Send Notification to all
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
+
         imageView1 = findViewById(R.id.imageView1);
 //        imageView2 = findViewById(R.id.imageView2);
 
@@ -82,6 +89,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 //                etbatchno,etsignby,
 //                etweDatetime,wesubmit
 
+        etint = (EditText) findViewById(R.id.etintime);
         etserialnumber =(EditText) findViewById(R.id.etserialnumber);
         etvehicalno =(EditText) findViewById(R.id.etvehicalno);
         etsuppliername=(EditText) findViewById(R.id.etsuppliername);
@@ -103,6 +111,8 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
         datetimeTextview=findViewById(R.id.etweDatetime);
 
+        imageView1 = (ImageView) findViewById(R.id.imageView1);
+
         // Adding Gross weight and Tare weight
         etgrossweight.addTextChangedListener(textWatcher);
         ettareweight.addTextChangedListener(textWatcher);
@@ -110,16 +120,10 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
         //view button
         view = findViewById(R.id.dbview);
-//        dbbutton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(Inward_Tanker_Security.this,Inward_Tanker_Security_Viewdata.class));
-//            }
-//        });
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Inward_Tanker_Weighment.this,Inward_Tanker_Weighment_Viewdata.class));
+                startActivity(new Intent(Inward_Tanker_Weighment.this, Inward_Tanker_Weighment_Viewdata.class));
             }
         });
 
@@ -157,7 +161,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
         wesubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                weinsertdata();
+                weinsertdata(imageView1.toString());
             }
         });
     }
@@ -208,9 +212,18 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
     }
 
+    public void makeNotification(){
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+                "Weighment Process Done..!",
+                "Sampling Can Start there Work",
+                getApplicationContext(), Inward_Tanker_Weighment.this);
+        notificationsSender.SendNotifications();
+    }
 
-   public  void weinsertdata(){
 
+   public  void weinsertdata(String imageView1){
+
+        String inte = etint.getText().toString().trim();
        String serialnumber  = etserialnumber.getText().toString().trim();
        String vehicelnumber = etvehicalno.getText().toString().trim();
        String suppliername = etsuppliername.getText().toString().trim();
@@ -233,7 +246,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
 
 
-       if (serialnumber.isEmpty() || vehicelnumber.isEmpty() || suppliername.isEmpty() || materialname.isEmpty() ||
+       if (  inte.isEmpty()||  serialnumber.isEmpty() || vehicelnumber.isEmpty() || suppliername.isEmpty() || materialname.isEmpty() ||
                custname.isEmpty() || driverno.isEmpty() || oan.isEmpty() || date.isEmpty() || grossweight.isEmpty() ||
                tareweight.isEmpty() || netweight.isEmpty() ||  density.isEmpty() || batchno.isEmpty() ||
                signby.isEmpty() || datetime.isEmpty() || container.isEmpty() || shortagedip.isEmpty() || shortageweight.isEmpty() ){
@@ -243,24 +256,27 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
 
            Map<String,String> weitems = new HashMap<>();
-           weitems.put("serial number",etserialnumber.getText().toString().trim());
-           weitems.put("vehicle number",etvehicalno.getText().toString().trim());
-           weitems.put("supplier name",etsuppliername.getText().toString().trim());
-           weitems.put("material name",etmaterialname.getText().toString().trim());
-           weitems.put("Customer Name",etcustname.getText().toString().trim());
-           weitems.put("Driver Number",etdriverno.getText().toString().trim());
-           weitems.put("OA number",etoano.getText().toString().trim());
+           weitems.put("In_Time",etint.getText().toString().trim());
+           weitems.put("serial_number",etserialnumber.getText().toString().trim());
+           weitems.put("vehicle_number",etvehicalno.getText().toString().trim());
+           weitems.put("supplier_name",etsuppliername.getText().toString().trim());
+           weitems.put("material_name",etmaterialname.getText().toString().trim());
+           weitems.put("Customer_Name",etcustname.getText().toString().trim());
+           weitems.put("Driver_Number",etdriverno.getText().toString().trim());
+           weitems.put("OA_number",etoano.getText().toString().trim());
            weitems.put("Date",etdate.getText().toString().trim());
-           weitems.put("Gross Weight",etgrossweight.getText().toString().trim());
-           weitems.put("Tare Weight",ettareweight.getText().toString().trim());
-           weitems.put("Net Weight",etnetweight.getText().toString().trim());
+           weitems.put("Gross_Weight",etgrossweight.getText().toString().trim());
+           weitems.put("Tare_Weight",ettareweight.getText().toString().trim());
+           weitems.put("Net_Weight",etnetweight.getText().toString().trim());
            weitems.put("Density",etdensity.getText().toString().trim());
-           weitems.put("Batch Number",etbatchno.getText().toString().trim());
-           weitems.put("Sign By",etsignby.getText().toString().trim());
-           weitems.put("We Date Time",etweDatetime.getText().toString().trim());
-           weitems.put("Container No",etcontainer.getText().toString().trim());
-           weitems.put("shortage Dip",etshortagedip.getText().toString().trim());
-           weitems.put("shortage weight",etshortageweight.getText().toString().trim());
+           weitems.put("Batch_Number",etbatchno.getText().toString().trim());
+           weitems.put("Sign_By",etsignby.getText().toString().trim());
+           weitems.put("We_Date_Time",etweDatetime.getText().toString().trim());
+           weitems.put("Container_No",etcontainer.getText().toString().trim());
+           weitems.put("shortage_Dip",etshortagedip.getText().toString().trim());
+           weitems.put("shortage_weight",etshortageweight.getText().toString().trim());
+
+           weitems.put("ImageURL",imageView1.toString());
 
 
 
@@ -270,6 +286,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
                        @Override
                        public void onComplete(@NonNull Task<DocumentReference> task) {
 
+                           etint.setText("");
                            etserialnumber.setText("");
                            etvehicalno.setText("");
                            etsuppliername.setText("");
@@ -287,11 +304,17 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
                            etshortagedip.setText("");
                            etshortageweight.setText("");
 
+
+
+
                            Toast.makeText(Inward_Tanker_Weighment.this, "Data Inserted Successfully", Toast.LENGTH_SHORT).show();
 
 
                        }
                    });
+           Intent intent= new Intent(this, Inward_Tanker.class);
+           startActivity(intent);
+           makeNotification();
 
 
 
@@ -359,7 +382,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
 
             imageView1.setImageBitmap(imageBitmap);
 
-            uploadImageToStorage();
+            uploadImageToStorage(imageView1.toString());
 
         }
 //        else if (resultCode == REQUEST_IMAGE_CAPTURE_2 && resultCode == RESULT_OK && data != null) {
@@ -382,7 +405,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
         return Uri.parse(path);
     }
 
-    private void uploadImageToStorage(){
+    private void uploadImageToStorage(String s){
         try {
             if (imageUri1 != null){
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("Inward_Tanker_Weighment/" + UUID.randomUUID() + ".jpg");
@@ -390,7 +413,9 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
                 storageRef.putFile(imageUri1)
                         .addOnSuccessListener(taskSnapshot -> {
                             storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                                saveImageUrlToFirestore(uri.toString());
+
+
+                                weinsertdata(imageView1.toString());
                             });
                         })
                         .addOnFailureListener(e -> {
@@ -409,7 +434,7 @@ public class Inward_Tanker_Weighment extends AppCompatActivity {
         image.put("imageUrl",imageUrl);
 //        image.put("In Driver", imageUrl);
 
-           firestore.collection("Weighment")
+           firestore.collection("Inward Tanker Weighment")
                 .add(image)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Image Upload succesfully", Toast.LENGTH_SHORT).show();

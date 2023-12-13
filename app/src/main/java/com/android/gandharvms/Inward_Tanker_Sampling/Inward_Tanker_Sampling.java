@@ -1,11 +1,14 @@
-package com.android.gandharvms;
+package com.android.gandharvms.Inward_Tanker_Sampling;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,12 +17,15 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.gandharvms.FcmNotificationsSender;
+import com.android.gandharvms.Inward_Tanker;
+import com.android.gandharvms.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +35,8 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
     EditText  etssignofproduction, etinvoiceno,etinvoicedate,materialname,etsqty1,suomqty,snetweight,suomnetwt,svesselname,sstoragetn,
             ssuppliername,etscustname,etsdate,etvehicleno;
     Button etssubmit;
+
+    Button view;
     FirebaseFirestore sadbroot;
     DatePickerDialog picker;
 
@@ -38,6 +46,9 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker_sampling);
+
+        //Send Notification to all
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
         etssignofproduction=(EditText)findViewById(R.id.etreciving);
         etinvoiceno=(EditText) findViewById(R.id.etsubmitted);
@@ -54,12 +65,21 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
         etsdate=(EditText)findViewById(R.id.etsdate);
         etvehicleno= (EditText)findViewById(R.id.etvehicleno);
 
+        view = findViewById(R.id.samplingview);
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Fragment fragment = new Inward_Tanker_Sampling_View_data();
+//
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.frasample,fragment).commit();
+//                startActivity(new Intent(Inward_Tanker_Sampling.this, Inward_Tanker_Sampling_View_data.class));
+                startActivity(new Intent(Inward_Tanker_Sampling.this,Inward_Tanker_saampling_View_data.class) );
+            }
+        });
 
-
-                // timepicker
-
-
+        // timepicker
         etssignofproduction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,6 +162,14 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
     }
 
+    public void makeNotification(){
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
+                "Sampling Process Done..!",
+                "Production Can Start there Work",
+                getApplicationContext(), Inward_Tanker_Sampling.this);
+        notificationsSender.SendNotifications();
+    }
+
     public void sainsertdata()
     {
         String etreciving = etssignofproduction.getText().toString().trim();
@@ -168,8 +196,8 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
             Map<String,String> saitems = new HashMap<>();
 
-            saitems.put("Sample Reciving Time",etssignofproduction.getText().toString().trim());
-            saitems.put("Sample Submitted Time",etinvoiceno.getText().toString().trim());
+            saitems.put("Sample_Reciving_Time",etssignofproduction.getText().toString().trim());
+            saitems.put("Sample_Submitted_Time",etinvoiceno.getText().toString().trim());
 //            saitems.put("Invoice Date",etinvoicedate.getText().toString().trim());
 //            saitems.put("Material Name",materialname.getText().toString().trim());
 //            saitems.put("Qty",etsqty1.getText().toString().trim());
@@ -181,7 +209,7 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 //            saitems.put("Supplier Name",ssuppliername.getText().toString().trim());
 //            saitems.put("Customer Name",etscustname.getText().toString().trim());
             saitems.put("Date",etsdate.getText().toString().trim());
-            saitems.put("Vehicle Number",etvehicleno.getText().toString().trim());
+            saitems.put("Vehicle_Number",etvehicleno.getText().toString().trim());
 
 
 
@@ -214,7 +242,12 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
                         }
                     });
+
+            Intent intent= new Intent(this, Inward_Tanker.class);
+            startActivity(intent);
+            makeNotification();
         }
+
 
 
     }
