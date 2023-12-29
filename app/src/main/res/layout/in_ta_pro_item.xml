@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="260dp"
+    android:layout_height="360dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
     android:layout_gravity="center_horizontal"
@@ -41,6 +41,31 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Out Time : "
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listouttime"
+                android:layout_marginStart="20dp"
+                android:text="12:03"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +75,68 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ReqTo Op To Unload : "
+                android:layout_marginStart="5dp"
+                android:text="Material: "
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/listmaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Capital Register"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Vehicle Number: "
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/listvehNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Capital Register"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/black" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Req To Op To Unload : "
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -81,7 +167,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tank Number  : "
+                android:text="Tank Number Requested  : "
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -111,7 +197,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="opration D/T :"
+                android:text="Operation D/T :"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -173,7 +259,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tanke Number Unloaded :"
+                android:text="Tank Number Unloaded :"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 android:textStyle="bold"
@@ -220,6 +306,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
+
 
 
     </LinearLayout>

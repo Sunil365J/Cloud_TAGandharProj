@@ -28,6 +28,99 @@
         android:theme="@style/Theme.GandharVMS"
         tools:targetApi="31">
         <activity
+            android:name=".OutwardOut_Truck_Billing"
+            android:exported="false" />
+        <activity
+            android:name=".OutwardOut_Truck_Weighment"
+            android:exported="false" />
+        <activity
+            android:name=".OutwardOut_Truck_Security"
+            android:exported="false" />
+        <activity
+            android:name=".OutwardOut_Truck"
+            android:exported="false" />
+        <activity
+            android:name=".OutwardOut_Tanker_Weighment"
+            android:exported="false" />
+        <activity
+            android:name=".OutwardOut_Tanker_Security"
+            android:exported="false" />
+        <activity
+            android:name=".OutwardOut_Tanker"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_Logistics"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_Dispatch"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_Billing"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_Production"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_Laboratory"
+            android:exported="false" />
+        <activity
+            android:name=".InwardOut_Truck_Security"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Truck_Out"
+            android:exported="false" />
+        <activity
+            android:name=".InwardOut_Truck_Weighment"
+            android:exported="false" />
+        <activity
+            android:name=".submenu.submenu_Inward_Truck"
+            android:exported="false" />
+        <activity
+            android:name=".InwardOut_Tanker_Security"
+            android:exported="false" />
+        <activity
+            android:name=".InwardOut_Tanker_Weighment"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Out"
+            android:exported="false" />
+        <activity
+            android:name=".submenu.submenu_Inward_Tanker"
+            android:exported="false" />
+        <activity
+            android:name=".Inward_Tanker_Production.Tanker_Production_Lab_Report_Data"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_weighment"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck_Security"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Truck"
+            android:exported="false" />
+        <activity
+            android:name=".submenu.Submenu_Outward_Truck"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Tanker_Billing"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Tanker_Production"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Tanker_Laboratory"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Tanker_weighment"
+            android:exported="false" />
+        <activity
+            android:name=".Outward_Tanker_Security"
+            android:exported="false" />
+        <activity
+            android:name=".submenu.Submenu_outward_tanker"
+            android:exported="false" />
+        <activity
             android:name=".Outward_Tanker"
             android:exported="false" />
         <activity

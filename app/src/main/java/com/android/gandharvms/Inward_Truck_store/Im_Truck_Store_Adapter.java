@@ -42,6 +42,7 @@ public class Im_Truck_Store_Adapter extends RecyclerView.Adapter<Im_Truck_Store_
         holder.etqty.setText(datalist.get(position).getQty());
         holder.etoum.setText(datalist.get(position).getOum());
         holder.etremark.setText(datalist.get(position).getRemarks());
+        holder.outTime.setText(datalist.get(position).getOutTime());
 
     }
 
@@ -52,7 +53,7 @@ public class Im_Truck_Store_Adapter extends RecyclerView.Adapter<Im_Truck_Store_
 
     class myviewholder extends RecyclerView.ViewHolder{
 
-        TextView etintime,etserialnumber,etvehicalnum,etpo,etdate,etmaterialrdate,etmaterial,etqty,etoum,etremark;
+        TextView etintime,etserialnumber,etvehicalnum,etpo,etdate,etmaterialrdate,etmaterial,etqty,etoum,etremark,outTime;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             etintime =itemView.findViewById(R.id.listintime);
@@ -65,6 +66,7 @@ public class Im_Truck_Store_Adapter extends RecyclerView.Adapter<Im_Truck_Store_
             etqty = itemView.findViewById(R.id.listqty);
             etoum = itemView.findViewById(R.id.listuom);
             etremark = itemView.findViewById(R.id.listremark);
+            outTime=itemView.findViewById(R.id.listouttime);
         }
     }
 }

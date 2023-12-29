@@ -49,6 +49,7 @@ public class In_Truck_weighment_Adapter extends RecyclerView.Adapter<In_Truck_we
         holder.etbatchno.setText(datalist.get(position).getBatch_No());
         holder.etsignby.setText(datalist.get(position).getSign_By());
         holder.etdatetime.setText(datalist.get(position).getDate_Time());
+        holder.outTime.setText(datalist.get(position).getOutTime());
 
     }
 
@@ -61,7 +62,7 @@ public class In_Truck_weighment_Adapter extends RecyclerView.Adapter<In_Truck_we
     class myviewholder extends RecyclerView.ViewHolder {
 
         TextView etintime, etserialnumber,etvehicalnumber,etsupplier,etmaterial,etcustomer,etdriver,etoanumber,etdate,
-                etgrossweight,ettareweight,etnetweight,etdensity,etbatchno,etsignby,etdatetime;
+                etgrossweight,ettareweight,etnetweight,etdensity,etbatchno,etsignby,etdatetime,outTime;
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +82,7 @@ public class In_Truck_weighment_Adapter extends RecyclerView.Adapter<In_Truck_we
             etbatchno = itemView.findViewById(R.id.batchnumber);
             etsignby = itemView.findViewById(R.id.signby);
             etdatetime = itemView.findViewById(R.id.datetime);
+            outTime=itemView.findViewById(R.id.listouttime);
         }
     }
 }

@@ -10,6 +10,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -42,13 +44,15 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
     DatePickerDialog pickertr;
     TimePickerDialog tpicker;
+    private final int MAX_LENGTH=10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker_sampling);
 
         //Send Notification to all
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        //Send Notification to all
+        FirebaseMessaging.getInstance().subscribeToTopic("fpCeq7ExSG-mLN86F97WEv:APA91bFYFk9jntkrKOpzBBFVyUVoYwew8ixqRQ1r5eVE2RyFDcpDYoy7MuNuS8A-RYpl1TTDd4ZFubA0Mq3bbQNoETWUMZZbsFzGMwi9NUh-k4MCEkgIcI9IjZW5Nmpfe-ncTXsCWqfa");
 
         etssignofproduction=(EditText)findViewById(R.id.etreciving);
         etinvoiceno=(EditText) findViewById(R.id.etsubmitted);
@@ -127,26 +131,51 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
         });
 
 
+        etvehicleno.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > MAX_LENGTH) {
+                    etvehicleno.removeTextChangedListener(this);
+                    String trimmedText = editable.toString().substring(0, MAX_LENGTH);
+                    etvehicleno.setText(trimmedText);
+                    etvehicleno.setSelection(MAX_LENGTH); // Move cursor to the end
+                    etvehicleno.addTextChangedListener(this);
+                }else if (editable.length() < MAX_LENGTH) {
+                    // Show an error message for less than 10 digits
+                    etvehicleno.setError("Invalid format. Enter 10 Character. \n Vehicle No Format - ST00AA9999 OR YYBR9999AA");
+                } else {
+                    // Clear any previous error message when valid
+                    etvehicleno.setError(null);
+                }
+            }
+        });
 
         etsdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              final Calendar calendar = Calendar.getInstance();
+                final Calendar calendar = Calendar.getInstance();
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
-
-
+                // Array of month abbreviations
+                String[] monthAbbreviations = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
                 picker = new DatePickerDialog(Inward_Tanker_Sampling.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etsdate.setText(dayOfMonth + "/" + (month +1 ) + "/" + year);
+                        // Use the month abbreviation from the array
+                        String monthAbbreviation = monthAbbreviations[month];
+                        etsdate.setText(dayOfMonth + "/" + monthAbbreviation + "/" + year);
                     }
-                } ,year,month,day);
+                }, year, month, day);
                 picker.show();
             }
         });
-
 
 
         etssubmit=(Button) findViewById(R.id.etssubmit);
@@ -162,10 +191,10 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
     }
 
-    public void makeNotification(){
-        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
-                "Sampling Process Done..!",
-                "Production Can Start there Work",
+    public void makeNotification(String vehicleNo,String outTime){
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("fpCeq7ExSG-mLN86F97WEv:APA91bFYFk9jntkrKOpzBBFVyUVoYwew8ixqRQ1r5eVE2RyFDcpDYoy7MuNuS8A-RYpl1TTDd4ZFubA0Mq3bbQNoETWUMZZbsFzGMwi9NUh-k4MCEkgIcI9IjZW5Nmpfe-ncTXsCWqfa",
+                "Inward Tanker Sampling Process Done..!",
+                "Vehicle Number:-" + vehicleNo + " has completed Sampling process at " + outTime,
                 getApplicationContext(), Inward_Tanker_Sampling.this);
         notificationsSender.SendNotifications();
     }
@@ -213,6 +242,14 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
 
 
+            makeNotification(etvehicleno.getText().toString(),etinvoiceno.getText().toString());
+
+
+
+
+
+
+
             sadbroot.collection("Inward Tanker Sampling").add(saitems)
 
                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -245,7 +282,7 @@ public class Inward_Tanker_Sampling extends AppCompatActivity {
 
             Intent intent= new Intent(this, Inward_Tanker.class);
             startActivity(intent);
-            makeNotification();
+
         }
 
 

@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.gandharvms.FcmNotificationsSender;
@@ -21,25 +25,31 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Inward_Tanker_Laboratory extends AppCompatActivity {
 
-    EditText etintime, etpsample,etvehiclenumber,etpapperance,etpodor,etpcolour,etpdensity,etqty,etPrcstest,etpkv,ethundred,etanline,etflash,etpaddtest,etpsamplere,etpremark,etpsignQc,etpdatesignofsign;
+    EditText etintime, etpsample,etvehiclenumber,etpapperance,etpodor,etpcolour,etpdensity,etqty,etPrcstest,etpkv,ethundred,etanline,etflash,etpaddtest,etpsamplere,etpremark,etpsignQc,etpdatesignofsign,etMaterial;
     Button etlabsub;
     Button view;
+    TimePickerDialog tpicker;
 
     FirebaseFirestore dblabroot;
 
     DatePickerDialog picker,picker1,picker2;
+    private final int MAX_LENGTH=10;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inward_tanker_laboratory);
         //Send Notification to all
-        FirebaseMessaging.getInstance().subscribeToTopic("all");
+        //Send Notification to all
+        FirebaseMessaging.getInstance().subscribeToTopic("eeEJ-ixdncup2-FtyzLVSu:APA91bGSjIm_CSC_VJCo56OFoc4IfAjKxvtSpg_Afmfha2OGxloggj3hmuMCjWtVmFF7cmGnKER_1fbHgkDpCjt8U9FCUtnLgF8lQonhS0WS-Aicu-W6j2bKAUDItioRUVHqCdrOGzEy");
 
         etintime = (EditText) findViewById(R.id.etintime);
         etpsample = (EditText) findViewById(R.id.etpsample);
@@ -59,6 +69,7 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
         etpremark =(EditText) findViewById(R.id.etpremark);
         etpsignQc=(EditText) findViewById(R.id.etpsignQc);
         etpdatesignofsign=(EditText) findViewById(R.id.etpdatesignofsign);
+        etMaterial=(EditText) findViewById(R.id.et_materialname);
 
 
 
@@ -72,6 +83,26 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
             }
         });
 
+        etintime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int hours = calendar.get(Calendar.HOUR_OF_DAY);
+                int mins = calendar.get(Calendar.MINUTE);
+                tpicker = new TimePickerDialog(Inward_Tanker_Laboratory.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        Calendar c = Calendar.getInstance();
+                        c.set(Calendar.HOUR_OF_DAY,hourOfDay);
+                        c.set(Calendar.MINUTE,minute);
+
+                        // Set the formatted time to the EditText
+                        etintime.setText(hourOfDay +":"+ minute );
+                    }
+                },hours,mins,false);
+                tpicker.show();
+            }
+        });
 
 
         etpsample.setOnClickListener(new View.OnClickListener() {
@@ -82,15 +113,18 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
+                // Array of month abbreviations
+                String[] monthAbbreviations = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
                 picker = new DatePickerDialog(Inward_Tanker_Laboratory.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etpsample.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        // Use the month abbreviation from the array
+                        String monthAbbreviation = monthAbbreviations[month];
+                        etpsample.setText(dayOfMonth + "/" + monthAbbreviation + "/" + year);
                     }
-                },year,month,day);
+                }, year, month, day);
                 picker.show();
-
-
             }
         });
 
@@ -102,16 +136,20 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
-                picker1= new DatePickerDialog(Inward_Tanker_Laboratory.this, new DatePickerDialog.OnDateSetListener() {
+                // Array of month abbreviations
+                String[] monthAbbreviations = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+                picker = new DatePickerDialog(Inward_Tanker_Laboratory.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etpsamplere.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        // Use the month abbreviation from the array
+                        String monthAbbreviation = monthAbbreviations[month];
+                        etpsamplere.setText(dayOfMonth + "/" + monthAbbreviation + "/" + year);
                     }
-                },year,month,day);
-                picker1.show();
+                }, year, month, day);
+                picker.show();
             }
         });
-
         etpdatesignofsign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,13 +158,42 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
-                picker2 = new DatePickerDialog(Inward_Tanker_Laboratory.this, new DatePickerDialog.OnDateSetListener() {
+                // Array of month abbreviations
+                String[] monthAbbreviations = new String[]{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+                picker = new DatePickerDialog(Inward_Tanker_Laboratory.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        etpdatesignofsign.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                        // Use the month abbreviation from the array
+                        String monthAbbreviation = monthAbbreviations[month];
+                        etpdatesignofsign.setText(dayOfMonth + "/" + monthAbbreviation + "/" + year);
                     }
-                },year,month,day);
-                picker2.show();
+                }, year, month, day);
+                picker.show();
+            }
+        });
+        etvehiclenumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > MAX_LENGTH) {
+                    etvehiclenumber.removeTextChangedListener(this);
+                    String trimmedText = editable.toString().substring(0, MAX_LENGTH);
+                    etvehiclenumber.setText(trimmedText);
+                    etvehiclenumber.setSelection(MAX_LENGTH); // Move cursor to the end
+                    etvehiclenumber.addTextChangedListener(this);
+                }else if (editable.length() < MAX_LENGTH) {
+                    // Show an error message for less than 10 digits
+                    etvehiclenumber.setError("Invalid format. Enter 10 Character. \n Vehicle No Format - ST00AA9999 OR YYBR9999AA");
+                } else {
+                    // Clear any previous error message when valid
+                    etvehiclenumber.setError(null);
+                }
             }
         });
 
@@ -139,12 +206,18 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
             }
         });
     }
-    public void makeNotification(){
-        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("/topics/all",
-                "Laboratory Process Done..!",
-                "Inward Tanker Process Has Completed",
+    public void makeNotification(String vehicleNo,String outTime){
+        FcmNotificationsSender notificationsSender = new FcmNotificationsSender("eeEJ-ixdncup2-FtyzLVSu:APA91bGSjIm_CSC_VJCo56OFoc4IfAjKxvtSpg_Afmfha2OGxloggj3hmuMCjWtVmFF7cmGnKER_1fbHgkDpCjt8U9FCUtnLgF8lQonhS0WS-Aicu-W6j2bKAUDItioRUVHqCdrOGzEy",
+                "Inward Tanker Laboratory Process Done..!",
+                "Vehicle Number:-" + vehicleNo + " has completed Laboratory process at " + outTime,
                 getApplicationContext(), Inward_Tanker_Laboratory.this);
         notificationsSender.SendNotifications();
+    }
+
+    private String getCurrentTime() {
+        // Get the current time
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        return sdf.format(new Date());
     }
     public void labinsertdata()
     {
@@ -166,10 +239,12 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
         String remark = etpremark.getText().toString().trim();
         String signQc = etpsignQc.getText().toString().trim();
         String dateSignOfSign = etpdatesignofsign.getText().toString().trim();
+        String outTime = getCurrentTime();//Insert out Time Directly to the Database
+        String material=etMaterial.getText().toString().trim();
 
 
         if ( intime.isEmpty() || sample.isEmpty() || vehicle.isEmpty() ||  apperance.isEmpty() || odor.isEmpty() || color.isEmpty() || qty.isEmpty()||  anline.isEmpty()|| flash.isEmpty()|| density.isEmpty() || rcsTest.isEmpty() ||
-                kv.isEmpty() || addTest.isEmpty() || sampleTest.isEmpty() || remark.isEmpty() || signQc.isEmpty() || dateSignOfSign.isEmpty()){
+                kv.isEmpty() || addTest.isEmpty() || sampleTest.isEmpty() || remark.isEmpty() || signQc.isEmpty() || dateSignOfSign.isEmpty() || material.isEmpty()){
 
             Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
         }else {
@@ -196,8 +271,12 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
             labitems.put("Remark",etpremark.getText().toString().trim());
             labitems.put("sign_of",etpsignQc.getText().toString().trim());
             labitems.put("Date_and_Time",etpdatesignofsign.getText().toString().trim());
+            labitems.put("outTime",outTime.toString());
+            labitems.put("Material",etMaterial.getText().toString().trim());
 
 
+
+            makeNotification(etvehiclenumber.getText().toString(),outTime.toString());
             dblabroot.collection("Inward Tanker Laboratory").add(labitems)
                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
@@ -221,6 +300,7 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
                             etpremark.setText("");
                             etpsignQc.setText("");
                             etpdatesignofsign.setText("");
+                            etMaterial.setText("");
 
                             Toast.makeText(Inward_Tanker_Laboratory.this, "Data Added Successfully", Toast.LENGTH_SHORT).show();
 
@@ -230,7 +310,7 @@ public class Inward_Tanker_Laboratory extends AppCompatActivity {
                     });
             Intent intent= new Intent(this, Inward_Tanker.class);
             startActivity(intent);
-            makeNotification();
+
 
 
         }

@@ -2,15 +2,15 @@ package com.android.gandharvms.Inward_Tanker_Security;
 
 public class In_Tanker_Security_list {
 
-    String SelectRegister,SerialNumber,date,intime,invoiceno,material,netweight,partyname,qty,uom,vehicalnumber;
+    String SerialNumber,date,intime,invoiceno,material,netweight,partyname,qty,uom,vehicalnumber,outTime,qtyuom,netweightuom;
 
     public In_Tanker_Security_list(){
 
     }
 
 
-    public In_Tanker_Security_list(String selectRegister, String serialNumber, String date, String intime, String invoiceno, String material, String netweight, String partyname, String qty, String uom, String vehicalnumber) {
-        this.SelectRegister = selectRegister;
+    public In_Tanker_Security_list( String serialNumber, String date, String intime, String invoiceno, String material, String netweight, String partyname, String qty, String uom, String vehicalnumber ,String outTime,String qtyuom,String netweightuom) {
+
         this.SerialNumber = serialNumber;
         this.date = date;
         this.intime = intime;
@@ -21,15 +21,12 @@ public class In_Tanker_Security_list {
         this.qty = qty;
         this.uom = uom;
         this.vehicalnumber = vehicalnumber;
+        this.outTime = outTime;
+        this.qtyuom=qtyuom;
+        this.netweightuom=netweightuom;
     }
 
-    public String getSelectRegister() {
-        return SelectRegister;
-    }
 
-    public void setSelectRegister(String selectRegister) {
-        SelectRegister = selectRegister;
-    }
 
     public String getSerialNumber() {
         return SerialNumber;
@@ -110,4 +107,13 @@ public class In_Tanker_Security_list {
     public void setVehicalnumber(String vehicalnumber) {
         this.vehicalnumber = vehicalnumber;
     }
+
+    public String getOuttime() { return outTime; }
+    public void setOuttime(String outTime){ this.outTime=outTime; }
+
+    public String getQtyuom(){ return qtyuom; }
+    public void setQtyuom(String qtyuom){ this.qtyuom=qtyuom; }
+
+    public String getNetweightuom(){return netweightuom;}
+    public void setNetweightuom(String netweightuom){ this.netweightuom=netweightuom; }
 }

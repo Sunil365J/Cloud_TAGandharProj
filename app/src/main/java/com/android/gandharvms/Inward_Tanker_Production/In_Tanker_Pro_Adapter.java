@@ -38,6 +38,9 @@ public class In_Tanker_Pro_Adapter extends RecyclerView.Adapter<In_Tanker_Pro_Ad
         holder.etconbyop.setText(datalist.get(position).getConfirm_unload());
         holder.tanknoun.setText(datalist.get(position).getTank_Number());
         holder.etconunloadDateTime.setText(datalist.get(position).getCon_unload_DT());
+        holder.outTime.setText(datalist.get(position).getOutTime());
+        holder.Material.setText(datalist.get(position).getMaterial());
+        holder.Vehicle_Number.setText(datalist.get(position).getVehicle_Number());
 
     }
 
@@ -50,7 +53,7 @@ public class In_Tanker_Pro_Adapter extends RecyclerView.Adapter<In_Tanker_Pro_Ad
     class myviewholder extends RecyclerView.ViewHolder
     {
 
-        TextView etint, etreq,ettankno,etreqtoDt,etconbyop,tanknoun,etconunloadDateTime;
+        TextView etint, etreq,ettankno,etreqtoDt,etconbyop,tanknoun,etconunloadDateTime,outTime,Material,Vehicle_Number;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             etint= itemView.findViewById(R.id.listintime);
@@ -60,6 +63,9 @@ public class In_Tanker_Pro_Adapter extends RecyclerView.Adapter<In_Tanker_Pro_Ad
             etconbyop=itemView.findViewById(R.id.unloadop);
             tanknoun = itemView.findViewById(R.id.tanknun);
             etconunloadDateTime = itemView.findViewById(R.id.condt);
+            outTime=itemView.findViewById(R.id.listouttime);
+            Material=itemView.findViewById(R.id.listmaterial);
+            Vehicle_Number=itemView.findViewById(R.id.listvehNumber);
 
         }
     }

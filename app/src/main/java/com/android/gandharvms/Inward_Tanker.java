@@ -55,7 +55,11 @@ private String userRole;
 
     }
     public void sequirityinwardT(View view){
-        if(userRole.equals("Security")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Tanker_Security.class);
+            startActivity(intent);
+        }
+        else if(userRole.equals("Security")){
             Intent intent= new Intent(this, Inward_Tanker_Security.class);
             startActivity(intent);
         }
@@ -65,7 +69,11 @@ private String userRole;
     }
 
     public void Weighmentclick(View view){
-        if(userRole.equals("Weighment")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Tanker_Weighment.class);
+            startActivity(intent);
+        }
+       else if(userRole.equals("Weighment")){
             Intent intent = new Intent(this, Inward_Tanker_Weighment.class);
             startActivity(intent);
         }
@@ -74,7 +82,11 @@ private String userRole;
         }
     }
     public void samplicgclick(View view){
-        if(userRole.equals("Sampling")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Tanker_Sampling.class);
+            startActivity(intent);
+        }
+        else if(userRole.equals("Sampling")){
             Intent intent = new Intent(this, Inward_Tanker_Sampling.class);
             startActivity(intent);
         }
@@ -84,7 +96,11 @@ private String userRole;
     }
 
     public void productionclick (View view){
-        if(userRole.equals("Production")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Tanker_Production.class);
+            startActivity(intent);
+        }
+        else if(userRole.equals("Production")){
             Intent intent = new Intent(this, Inward_Tanker_Production.class);
             startActivity(intent);
         }
@@ -93,7 +109,11 @@ private String userRole;
         }
     }
     public void Laboratoryclick (View view){
-        if(userRole.equals("Laboratory")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Tanker_Laboratory.class);
+            startActivity(intent);
+        }
+        else if(userRole.equals("Laboratory")){
             Intent intent = new Intent(this, Inward_Tanker_Laboratory.class);
             startActivity(intent);
         }

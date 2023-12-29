@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,10 +21,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Register extends AppCompatActivity {
 
     private String setRole="";
+    private String token;
+    private final int MAX_LENGTH=10;
 
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://gandharvms-default-rtdb.firebaseio.com/");
@@ -49,6 +56,48 @@ public class Register extends AppCompatActivity {
         final CheckBox laboratary=findViewById(R.id.isLaboratary);
         final CheckBox stores=findViewById(R.id.isStores);
 
+        emailid.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String email = editable.toString().trim();
+                if(!isValidEmail(email)){
+                    emailid.setError("Invalid Email Format");
+                }else {
+                    emailid.setError(null);//clear the error
+                }
+            }
+        });
+        phoneno.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() > MAX_LENGTH) {
+                    phoneno.removeTextChangedListener(this);
+                    String trimmedText = editable.toString().substring(0, MAX_LENGTH);
+                    phoneno.setText(trimmedText);
+                    phoneno.setSelection(MAX_LENGTH); // Move cursor to the end
+                    phoneno.addTextChangedListener(this);
+                }else if (editable.length() < MAX_LENGTH) {
+                    // Show an error message for less than 10 digits
+                    phoneno.setError("Invalid format. Enter 10 digits");
+                } else {
+                    // Clear any previous error message when valid
+                    phoneno.setError(null);
+                }
+            }
+        });
 
         security.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -150,10 +199,41 @@ public class Register extends AppCompatActivity {
                     setRole="Store";
                 }
 
-                if (nameTxt.isEmpty() || emplidTxt.isEmpty() || emailidTxt.isEmpty() ||
-                     phoneTxt.isEmpty() || passwordTxt.isEmpty()){
-                    Toast.makeText(Register.this, "Please fill all Fields", Toast.LENGTH_SHORT).show();
+
+                if(TextUtils.isEmpty(nameTxt)){
+                    name.setError("Name is Required");
+                    return;
                 }
+                if(TextUtils.isEmpty(emplidTxt)){
+                    emplid.setError("Employee Id is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(emailidTxt)){
+                    emailid.setError("Email Id is Required");
+                    return;
+                }
+                if(TextUtils.isEmpty(phoneTxt)){
+                    phoneno.setError("Phone No is Required");
+                    return;
+                }
+                if (TextUtils.isEmpty(passwordTxt)){
+                    password.setError("Passsword is Required");
+                    return;
+                }
+                if(passwordTxt.length()<8){
+                    password.setError("Password Must be >= 8 Characters");
+                    return;
+                }
+
+                FirebaseMessaging.getInstance().getToken()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                token = task.getResult();
+                                // Use the token as needed
+                            } else {
+                                // Handle the error
+                            }
+                        });
                 //Checkbox Validation
                 if(!(security.isChecked() || weighment.isChecked() || sampling.isChecked() || production.isChecked() || laboratary.isChecked() || stores.isChecked()))
                 {
@@ -176,6 +256,7 @@ public class Register extends AppCompatActivity {
                                 databaseReference.child("users").child(emplidTxt).child("phoneno").setValue(phoneTxt);
                                 databaseReference.child("users").child(emplidTxt).child("password").setValue(passwordTxt);
                                 databaseReference.child("users").child(emplidTxt).child("role").setValue(setRole);
+                                databaseReference.child("users").child(emplidTxt).child("token").setValue(token);
 
                                 Toast.makeText(Register.this, "User Register succesfully", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -201,5 +282,8 @@ public class Register extends AppCompatActivity {
         });
 
 
+    }
+    private boolean isValidEmail(CharSequence target) {
+        return (Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 }

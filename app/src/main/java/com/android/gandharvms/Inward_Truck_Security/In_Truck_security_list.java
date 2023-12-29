@@ -3,12 +3,12 @@ package com.android.gandharvms.Inward_Truck_Security;
 public class In_Truck_security_list {
 
 //    String etintime,etserialnumber,etvehicalnumber,etsinvocieno,etsdate,etssupplier,etsmaterial,etsqty,etsuom,etsnetwt,etsuom2;
-    String Intime,serialnumber,VehicalNumber,invoicenumber,date,Supplier,Material,Qty,UOM,etsnetweight,UOM2;
+    String Intime,serialnumber,VehicalNumber,invoicenumber,date,Supplier,Material,Qty,UOM,etsnetweight,UOM2,outTime,SelectRegister;
 
     public In_Truck_security_list() {
     }
 
-    public In_Truck_security_list(String intime, String serialnumber, String vehicalNumber, String invoicenumber, String date, String supplier, String material, String qty, String UOM, String etsnetweight, String UOM2) {
+    public In_Truck_security_list(String intime, String serialnumber, String vehicalNumber, String invoicenumber, String date, String supplier, String material, String qty, String UOM, String etsnetweight, String UOM2,String outTime,String selectRegister) {
         Intime = intime;
         this.serialnumber = serialnumber;
         VehicalNumber = vehicalNumber;
@@ -20,6 +20,8 @@ public class In_Truck_security_list {
         this.UOM = UOM;
         this.etsnetweight = etsnetweight;
         this.UOM2 = UOM2;
+        this.outTime=outTime;
+        this.SelectRegister = selectRegister;
     }
 
     public String getIntime() {
@@ -110,6 +112,21 @@ public class In_Truck_security_list {
         this.UOM2 = UOM2;
     }
 
+    public String getOutTime() {
+        return outTime;
+    }
+
+    public void setOutTime(String outTime) {
+        this.outTime = outTime;
+    }
+
+    public String getSelectRegister() {
+        return SelectRegister;
+    }
+
+    public void setSelectRegister(String selectRegister) {
+        SelectRegister = selectRegister;
+    }
     //    public In_Truck_security_list() {
 //    }
 //

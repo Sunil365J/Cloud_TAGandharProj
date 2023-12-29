@@ -3,12 +3,12 @@ package com.android.gandharvms.Inward_Tanker_Weighment;
 public class In_Tanker_Weighment_list {
 
     String   In_Time,serial_number,vehicle_number,supplier_name,material_name,Customer_Name,Driver_Number,OA_number,Date,
-            Gross_Weight,Tare_Weight,Net_Weight,Density,Batch_Number,Sign_By,We_Date_Time,Container_No,shortage_Dip,shortage_weight;
+            Gross_Weight,Tare_Weight,Net_Weight,Density,Batch_Number,Sign_By,We_Date_Time,Container_No,shortage_Dip,shortage_weight,outTime;
 
     public In_Tanker_Weighment_list() {
     }
 
-    public In_Tanker_Weighment_list( String in_Time,  String serial_number, String vehicle_number, String supplier_name, String material_name, String customer_Name, String driver_Number, String OA_number, String date, String gross_Weight, String tare_Weight, String net_Weight, String density, String batch_Number, String sign_By, String we_Date_Time, String container_No, String shortage_Dip, String shortage_weight) {
+    public In_Tanker_Weighment_list( String in_Time,  String serial_number, String vehicle_number, String supplier_name, String material_name, String customer_Name, String driver_Number, String OA_number, String date, String gross_Weight, String tare_Weight, String net_Weight, String density, String batch_Number, String sign_By, String we_Date_Time, String container_No, String shortage_Dip, String shortage_weight ,String outTime) {
         this.In_Time = in_Time;
         this.serial_number = serial_number;
         this.vehicle_number = vehicle_number;
@@ -28,6 +28,7 @@ public class In_Tanker_Weighment_list {
         this.Container_No = container_No;
         this.shortage_Dip = shortage_Dip;
         this.shortage_weight = shortage_weight;
+        this.outTime=outTime;
     }
 
     public String getIn_Time(){
@@ -180,4 +181,6 @@ public class In_Tanker_Weighment_list {
     public void setShortage_weight(String shortage_weight) {
         this.shortage_weight = shortage_weight;
     }
+    public String getOuttime() { return outTime; }
+    public void setOuttime(String outTime){ this.outTime=outTime; }
 }

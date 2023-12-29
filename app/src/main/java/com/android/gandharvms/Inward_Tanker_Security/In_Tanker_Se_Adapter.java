@@ -40,7 +40,7 @@ public class In_Tanker_Se_Adapter extends RecyclerView.Adapter<In_Tanker_Se_Adap
 
 //        In_Tanker_Security_list inTankerSecurityList = inTankerSecurityListArrayList.get(position);
 
-        holder.selectregister.setText(inTankerSecurityListArrayList.get(position).getSelectRegister());
+
         holder.serialnumber.setText(inTankerSecurityListArrayList.get(position).getSerialNumber());
         holder.vehiclenumber.setText(inTankerSecurityListArrayList.get(position).getVehicalnumber());
         holder.invoiceno.setText(inTankerSecurityListArrayList.get(position).getInvoiceno());
@@ -51,6 +51,15 @@ public class In_Tanker_Se_Adapter extends RecyclerView.Adapter<In_Tanker_Se_Adap
         holder.uom.setText(inTankerSecurityListArrayList.get(position).getUom());
         holder.netweight.setText(inTankerSecurityListArrayList.get(position).getNetweight());
         holder.intime.setText(inTankerSecurityListArrayList.get(position).getIntime());
+        holder.outTime.setText(inTankerSecurityListArrayList.get(position).getOuttime());
+        holder.qtyuom.setText(inTankerSecurityListArrayList.get(position).getQtyuom());
+        holder.netweightuom.setText(inTankerSecurityListArrayList.get(position).getNetweightuom());
+
+
+
+
+
+
 
 //        holder.selectregister.setText(inTankerSecurityList.SelectRegister);
 //        holder.serialnumber.setText(inTankerSecurityList.SerialNumber);
@@ -74,11 +83,11 @@ public class In_Tanker_Se_Adapter extends RecyclerView.Adapter<In_Tanker_Se_Adap
 
     public static class myviewHolder extends RecyclerView.ViewHolder{
 
-        TextView selectregister,serialnumber,vehiclenumber,invoiceno,date,partyname,material,qty,uom,netweight,intime;
+        TextView serialnumber,vehiclenumber,invoiceno,date,partyname,material,qty,uom,netweight,intime,outTime,qtyuom,netweightuom;
         public myviewHolder(@NonNull View itemView) {
             super(itemView);
 
-            selectregister= itemView.findViewById(R.id.listregister);
+
             serialnumber = itemView.findViewById(R.id.listserialnumber);
             vehiclenumber = itemView.findViewById(R.id.listvehiclenumber);
             invoiceno= itemView.findViewById(R.id.listinvoiceno);
@@ -89,6 +98,10 @@ public class In_Tanker_Se_Adapter extends RecyclerView.Adapter<In_Tanker_Se_Adap
             uom= itemView.findViewById(R.id.listuom);
             netweight= itemView.findViewById(R.id.listnetweight);
             intime = itemView.findViewById(R.id.listintime);
+            outTime = itemView.findViewById(R.id.listouttime);
+            qtyuom= itemView.findViewById(R.id.listuom);
+            netweightuom=itemView.findViewById(R.id.listnetweightuom);
+
         }
     }
 }

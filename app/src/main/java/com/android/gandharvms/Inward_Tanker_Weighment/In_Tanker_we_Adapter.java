@@ -53,6 +53,7 @@ public class In_Tanker_we_Adapter extends RecyclerView.Adapter<In_Tanker_we_Adap
         holder.datetime.setText(datalist.get(position).getWe_Date_Time());
         holder.shortagedip.setText(datalist.get(position).getShortage_Dip());
         holder.shortageweight.setText(datalist.get(position).getShortage_weight());
+        holder.outTime.setText(datalist.get(position).getOuttime());
 
 //                date,grossweight,tareweight,netweight,density,batchnumber,containerno,
 //                sighby,datetime,shortagedip,shortageweight;
@@ -67,7 +68,7 @@ public class In_Tanker_we_Adapter extends RecyclerView.Adapter<In_Tanker_we_Adap
 
         class myviewholder extends RecyclerView.ViewHolder
     {
-        TextView intime,serialnumber,vehiclenumber,suppliername,materialname,cutomername,driverno,oanumber,date,grossweight,tareweight,netweight,density,batchnumber,containerno,
+        TextView intime,serialnumber,vehiclenumber,suppliername,materialname,cutomername,driverno,oanumber,date,grossweight,tareweight,netweight,density,batchnumber,containerno,outTime,
         sighby,datetime,shortagedip,shortageweight;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +91,7 @@ public class In_Tanker_we_Adapter extends RecyclerView.Adapter<In_Tanker_we_Adap
             datetime = itemView.findViewById(R.id.datetime);
             shortagedip = itemView.findViewById(R.id.shortagedip);
             shortageweight = itemView.findViewById(R.id.shortageweight);
+            outTime = itemView.findViewById(R.id.listouttime);
         }
     }
 }

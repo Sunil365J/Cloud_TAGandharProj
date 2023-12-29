@@ -1,12 +1,12 @@
 package com.android.gandharvms.Inward_Truck_store;
 
 public class In_Truck_Store_list {
-    String In_Time,Serial_Number,Vehicle_Number,PO_No,Po_Date,Material_Rec_Date,Material,Qty,Oum,Remarks;
+    String In_Time,Serial_Number,Vehicle_Number,PO_No,Po_Date,Material_Rec_Date,Material,Qty,Oum,Remarks,outTime;
 
     public In_Truck_Store_list() {
     }
 
-    public In_Truck_Store_list(String in_Time, String serial_Number, String vehicle_Number, String po_no, String po_Date, String material_Rec_Date, String material, String qty, String oum, String remarks) {
+    public In_Truck_Store_list(String in_Time, String serial_Number, String vehicle_Number, String po_no, String po_Date, String material_Rec_Date, String material, String qty, String oum, String remarks,String outTime) {
         In_Time = in_Time;
         Serial_Number = serial_Number;
         Vehicle_Number = vehicle_Number;
@@ -17,6 +17,7 @@ public class In_Truck_Store_list {
         Qty = qty;
         Oum = oum;
         Remarks = remarks;
+        this.outTime=outTime;
     }
 
     public String getIn_Time() {
@@ -98,5 +99,13 @@ public class In_Truck_Store_list {
 
     public void setRemarks(String remarks) {
         Remarks = remarks;
+    }
+
+    public String getOutTime() {
+        return outTime;
+    }
+
+    public void setOutTime(String outTime) {
+        this.outTime = outTime;
     }
 }

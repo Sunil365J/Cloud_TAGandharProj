@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.gandharvms.Inward_Tanker_Security.Inward_Tanker_Security;
 import com.android.gandharvms.Inward_Truck_Security.Inward_Truck_Security;
 import com.android.gandharvms.Inward_Truck_Weighment.Inward_Truck_weighment;
 import com.android.gandharvms.Inward_Truck_store.Inward_Truck_Store;
@@ -45,7 +46,11 @@ public class Inward_Truck extends AppCompatActivity {
 
 
     public void sequirtyinwardtruck(View view) {
-        if(userRole.equals("Security")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Truck_Security.class);
+            startActivity(intent);
+        }
+        else if(userRole.equals("Security")){
             Intent intent= new Intent(this,Inward_Truck_Security.class);
             startActivity(intent);
         }
@@ -55,7 +60,11 @@ public class Inward_Truck extends AppCompatActivity {
     }
 
     public void Weighmentinwardtruck(View view) {
-        if(userRole.equals("Weighment")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Truck_weighment.class);
+            startActivity(intent);
+        }
+       else if(userRole.equals("Weighment")){
             Intent intent = new Intent(this,Inward_Truck_weighment.class);
             startActivity(intent);
         }
@@ -65,7 +74,11 @@ public class Inward_Truck extends AppCompatActivity {
     }
 
     public void storeinwardtruck(View view) {
-        if(userRole.equals("Store")){
+        if(userRole.equals("Admin")){
+            Intent intent= new Intent(this, Inward_Truck_Store.class);
+            startActivity(intent);
+        }
+        else if(userRole.equals("Store")){
             Intent intent = new Intent(this,Inward_Truck_Store.class);
             startActivity(intent);
         }

@@ -2,12 +2,12 @@ package com.android.gandharvms.Inward_Tanker_Production;
 
 public class In_Tanker_Production_list {
 
-String  In_Time, Req_to_unload,Tank_Number_Request,Req_to_op_DT,confirm_unload,Tank_Number,con_unload_DT;
+String  In_Time, Req_to_unload,Tank_Number_Request,Req_to_op_DT,confirm_unload,Tank_Number,con_unload_DT,outTime,Material,Vehicle_Number;
 
     public In_Tanker_Production_list() {
     }
 
-    public In_Tanker_Production_list( String in_Time, String req_to_unload, String tank_Number_Request, String req_to_op_DT, String confirm_unload, String tank_Number, String con_unload_DT) {
+    public In_Tanker_Production_list( String in_Time, String req_to_unload, String tank_Number_Request, String req_to_op_DT, String confirm_unload, String tank_Number, String con_unload_DT,String outTime,String Material,String Vehicle_Number) {
         this.In_Time = in_Time;
         this.Req_to_unload = req_to_unload;
        this.Tank_Number_Request = tank_Number_Request;
@@ -15,6 +15,8 @@ String  In_Time, Req_to_unload,Tank_Number_Request,Req_to_op_DT,confirm_unload,T
         this.confirm_unload = confirm_unload;
         this.Tank_Number = tank_Number;
         this.con_unload_DT = con_unload_DT;
+        this.outTime=outTime;
+        this.Vehicle_Number=Vehicle_Number;
     }
 
 
@@ -73,4 +75,19 @@ String  In_Time, Req_to_unload,Tank_Number_Request,Req_to_op_DT,confirm_unload,T
     public void setCon_unload_DT(String con_unload_DT) {
         this.con_unload_DT = con_unload_DT;
     }
+
+    public String getOutTime() {
+        return outTime;
+    }
+
+    public void setOutTime(String outTime) {
+        this.outTime = outTime;
+    }
+
+    public String getMaterial(){ return Material; }
+
+    public void setMaterial(String Material){this.Material=Material;}
+
+    public String getVehicle_Number(){return Vehicle_Number;}
+    public void setVehicle_Number(String Vehicle_Number){ this.Vehicle_Number=Vehicle_Number; }
 }

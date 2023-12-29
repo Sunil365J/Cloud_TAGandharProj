@@ -44,6 +44,8 @@ public class In_Truck_Security_Adapter extends RecyclerView.Adapter<In_Truck_Sec
         holder.etsuom.setText(datalist.get(position).getUOM());
         holder.etsnetwt.setText(datalist.get(position).getEtsnetweight());
         holder.etsuom2.setText(datalist.get(position).getUOM2());
+        holder.outTime.setText(datalist.get(position).getOutTime());
+        holder.selectregister.setText(datalist.get(position).getSelectRegister());
 
     }
 
@@ -54,7 +56,7 @@ public class In_Truck_Security_Adapter extends RecyclerView.Adapter<In_Truck_Sec
     }
 
     class myviewholder extends RecyclerView.ViewHolder {
-        TextView etintime,etserialnumber,etvehicalnumber,etsinvocieno,etsdate,etssupplier,etsmaterial,etsqty,etsuom,etsnetwt,etsuom2;
+        TextView etintime,etserialnumber,etvehicalnumber,etsinvocieno,etsdate,etssupplier,etsmaterial,etsqty,etsuom,etsnetwt,etsuom2,outTime,selectregister;
         public myviewholder(@NonNull View itemView) {
             super(itemView);
             etintime=itemView.findViewById(R.id.listintime);
@@ -68,6 +70,8 @@ public class In_Truck_Security_Adapter extends RecyclerView.Adapter<In_Truck_Sec
             etsuom= itemView.findViewById(R.id.listuom);
             etsnetwt= itemView.findViewById(R.id.listnetweight);
             etsuom2= itemView.findViewById(R.id.listuom2);
+            outTime=itemView.findViewById(R.id.listouttime);
+            selectregister= itemView.findViewById(R.id.listregister);
 
 
 

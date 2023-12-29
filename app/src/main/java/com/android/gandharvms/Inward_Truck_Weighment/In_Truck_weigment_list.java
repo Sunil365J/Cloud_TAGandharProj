@@ -2,13 +2,13 @@ package com.android.gandharvms.Inward_Truck_Weighment;
 
 public class In_Truck_weigment_list {
 
-    String In_Time, Serial_Number,Vehicle_Number,Supplier,Material,Driver_No,Customer,Oa_Number,Date,Gross_Weight,Tare_Weight,Net_Weight,Density,Batch_No,Sign_By,Date_Time;
+    String In_Time, Serial_Number,Vehicle_Number,Supplier,Material,Driver_No,Customer,Oa_Number,Date,Gross_Weight,Tare_Weight,Net_Weight,Density,Batch_No,Sign_By,Date_Time,outTime;
 
     public In_Truck_weigment_list() {
     }
 
     public In_Truck_weigment_list( String in_Time, String serial_Number, String vehicle_Number, String supplier, String material,String driver_No, String customer,
-                                  String oa_Number, String date, String gross_Weight, String tare_Weight, String net_Weight, String density, String batch_No, String sign_By, String date_Time) {
+                                  String oa_Number, String date, String gross_Weight, String tare_Weight, String net_Weight, String density, String batch_No, String sign_By, String date_Time,String outTime) {
         In_Time = in_Time;
         Serial_Number = serial_Number;
         Vehicle_Number = vehicle_Number;
@@ -25,6 +25,7 @@ public class In_Truck_weigment_list {
         Batch_No = batch_No;
         this.Sign_By = sign_By;
         Date_Time = date_Time;
+        this.outTime=outTime;
     }
 
     public String getIn_Time() {
@@ -164,5 +165,14 @@ public class In_Truck_weigment_list {
 
     public void setDate_Time(String date_Time) {
         Date_Time = date_Time;
+    }
+
+
+    public String getOutTime() {
+        return outTime;
+    }
+
+    public void setOutTime(String outTime) {
+        this.outTime = outTime;
     }
 }
